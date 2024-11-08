@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import styles from './LandingPage.module.css';
-import ImageGallery from 'react-image-gallery';
+import { Link } from 'react-router-dom';
 import "react-image-gallery/styles/css/image-gallery.css";
 
 
@@ -119,54 +119,64 @@ const LandingPage = () => {
       </section>
 
       <section className={styles.features}>
-        {Object.entries(images).map(([galleryKey, galleryImages]) => (
-          <div key={galleryKey} className={styles.featureCard}>
-            <img
-              src={
-                galleryKey === 'torrePisa'
-                  ? image1
-                  : galleryKey === 'tajMahal'
-                  ? image2
-                  : image3
-              }
-              alt={`Foto de destino ${galleryKey}`}
-              onClick={() =>
-                openModal(galleryImages, 
-                  galleryKey === 'torrePisa' ? image1 : 
-                  galleryKey === 'tajMahal' ? image2 : 
-                  image3
-                )
-              }
-            />
-            <h3>
-              {galleryKey === 'torrePisa'
-                ? 'Torre de Pisa'
-                : galleryKey === 'tajMahal'
-                ? 'Taj Mahal, India'
-                : 'Cataratas Victoria'}
-            </h3>
-            <p>
-              {galleryKey === 'torrePisa'
-                ? 'Descubre la historia detrás de la torre más inclinada del mundo y su enigmático encanto.'
-                : galleryKey === 'tajMahal'
-                ? 'Adéntrate en el monumento más romántico del mundo y déjate sorprender por su belleza eterna.'
-                : 'Explora la majestuosidad de las Cataratas Victoria, donde la naturaleza muestra todo su poder.'}
-            </p>
-            <button className={styles.learnButton}>Learn More</button>
-            <div className={styles.featureGallery}>
-              {galleryImages.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Imagen de galería ${index + 1}`}
-                  onClick={() => openModal(galleryImages, img)}
-                  className={styles.thumbnail}
-                />
-              ))}
-            </div>
-          </div>
+  {Object.entries(images).map(([galleryKey, galleryImages]) => (
+    <div key={galleryKey} className={styles.featureCard}>
+      <img
+        src={
+          galleryKey === 'torrePisa'
+            ? image1
+            : galleryKey === 'tajMahal'
+            ? image2
+            : image3
+        }
+        alt={`Foto de destino ${galleryKey}`}
+        onClick={() =>
+          openModal(galleryImages, 
+            galleryKey === 'torrePisa' ? image1 : 
+            galleryKey === 'tajMahal' ? image2 : 
+            image3
+          )
+        }
+      />
+      <h3>
+        {galleryKey === 'torrePisa'
+          ? 'Torre de Pisa'
+          : galleryKey === 'tajMahal'
+          ? 'Taj Mahal, India'
+          : 'Cataratas Victoria'}
+      </h3>
+      <p>
+        {galleryKey === 'torrePisa'
+          ? 'Descubre la historia detrás de la torre más inclinada del mundo y su enigmático encanto.'
+          : galleryKey === 'tajMahal'
+          ? 'Adéntrate en el monumento más romántico del mundo y déjate sorprender por su belleza eterna.'
+          : 'Explora la majestuosidad de las Cataratas Victoria, donde la naturaleza muestra todo su poder.'}
+      </p>
+      {/* Botón "Learn More" modificado para usar Link */}
+      <Link to={
+        galleryKey === 'torrePisa'
+          ? '/torre-de-pisa'
+          : galleryKey === 'tajMahal'
+          ? '/taj-mahal'
+          : '/cataratas-victoria'
+      }>
+        <button className={styles.learnButton}>Learn More</button>
+      </Link>
+      <div className={styles.featureGallery}>
+        {galleryImages.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Imagen de galería ${index + 1}`}
+            onClick={() => openModal(galleryImages, img)}
+            className={styles.thumbnail}
+          />
         ))}
-      </section>
+      </div>
+    </div>
+  ))}
+</section>
+
 
       {/* Modal para la galería */}
       <Modal
