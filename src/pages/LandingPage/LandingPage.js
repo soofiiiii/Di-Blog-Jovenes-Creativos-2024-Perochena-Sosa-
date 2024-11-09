@@ -4,7 +4,6 @@ import styles from './LandingPage.module.css';
 import { Link } from 'react-router-dom';
 import "react-image-gallery/styles/css/image-gallery.css";
 
-
 // Importaciones de imágenes
 import image1 from '../../assets/image1.jpg';
 import image2 from '../../assets/image2.jpg';
@@ -29,11 +28,40 @@ import galleryImage12 from '../../assets/gallery12.jpg';
 
 const LandingPage = () => {
 
+  // Sección de Estados
+
    // Estado para abrir la galería
    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
    const [currentImage, setCurrentImage] = useState(null);
    const [currentGallery, setCurrentGallery] = useState([]);
 
+  // Estado para la búsqueda
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Definir el estado del menú
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+
+  // Sección de Métodos
+
+  // Avanzar a la siguiente imagen
+  const goToNextImage = () => {
+    const currentIndex = currentGallery.indexOf(currentImage);
+    const nextIndex = (currentIndex + 1) % currentGallery.length;
+    setCurrentImage(currentGallery[nextIndex]);
+  };
+
+  // Retroceder a la imagen anterior
+  const goToPreviousImage = () => {
+    const currentIndex = currentGallery.indexOf(currentImage);
+    const previousIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    setCurrentImage(currentGallery[previousIndex]);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   // Galerías de imágenes para cada destino
   const images = {
@@ -55,49 +83,42 @@ const LandingPage = () => {
     setCurrentImage(null);
   };
 
-  // Avanzar a la siguiente imagen
-  const goToNextImage = () => {
-    const currentIndex = currentGallery.indexOf(currentImage);
-    const nextIndex = (currentIndex + 1) % currentGallery.length;
-    setCurrentImage(currentGallery[nextIndex]);
-  };
-
-  // Retroceder a la imagen anterior
-  const goToPreviousImage = () => {
-    const currentIndex = currentGallery.indexOf(currentImage);
-    const previousIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-    setCurrentImage(currentGallery[previousIndex]);
-  };
-
-   // Estado para la búsqueda
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Definir el estado del menú
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
     <div className={styles.container}>
+       {/* Header */}
       <header className={styles.header}>
-      <h1 className={styles.navTitle}>Di-Blog</h1>
-      <nav className={styles.nav}>
-        <button className={styles.hamburgerButton} onClick={toggleMenu}>
-          ☰
-        </button>
-        <ul className={`${styles['nav-links']} ${isMenuOpen ? styles.showMenu : ''}`}>
-          {['HOLA', 'BLOG DE VIAJE', 'DESTINOS', 'GUÍAS', 'SOBRE NOSOTROS'].map((link) => (
-            <li key={link} onClick={() => setIsMenuOpen(false)}>
-              {link}
+        {/* Link para redirigir a la landing page */}
+        <Link to="/" className={styles.navTitle}>Di-Blog</Link>
+
+        <nav className={styles.nav}>
+          <button className={styles.hamburgerButton} onClick={toggleMenu}>
+            ☰
+          </button>
+          <ul className={`${styles['nav-links']} ${isMenuOpen ? styles.showMenu : ''}`}>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <Link to="/">HOLA</Link>
             </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <Link to="/blog-de-viaje">BLOG DE VIAJE</Link>
+            </li>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <Link to="/destinos">DESTINOS</Link>
+            </li>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <Link to="/guias">GUÍAS</Link>
+            </li>
+            <li onClick={() => setIsMenuOpen(false)}>
+              <Link to="/sobre-nosotros">SOBRE NOSOTROS</Link>
+            </li>
+            {/* Agrega el link al inicio de sesión */}
+            <Link to="/login">Iniciar Sesión</Link>
+            <Link to="/register">Registrarse</Link>
+          </ul>
+        </nav>
+      </header>
     
 
+      {/* Hero Section */}
       <section className={styles.heroSection} style={{ backgroundImage: `url(${image6})` }}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>Di-Blog</h1>
@@ -118,64 +139,70 @@ const LandingPage = () => {
         </div>
       </section>
 
+
+      {/* Features Section */}
       <section className={styles.features}>
-  {Object.entries(images).map(([galleryKey, galleryImages]) => (
-    <div key={galleryKey} className={styles.featureCard}>
-      <img
-        src={
-          galleryKey === 'torrePisa'
-            ? image1
-            : galleryKey === 'tajMahal'
-            ? image2
-            : image3
-        }
-        alt={`Foto de destino ${galleryKey}`}
-        onClick={() =>
-          openModal(galleryImages, 
-            galleryKey === 'torrePisa' ? image1 : 
-            galleryKey === 'tajMahal' ? image2 : 
-            image3
-          )
-        }
-      />
-      <h3>
-        {galleryKey === 'torrePisa'
-          ? 'Torre de Pisa'
-          : galleryKey === 'tajMahal'
-          ? 'Taj Mahal, India'
-          : 'Cataratas Victoria'}
-      </h3>
-      <p>
-        {galleryKey === 'torrePisa'
-          ? 'Descubre la historia detrás de la torre más inclinada del mundo y su enigmático encanto.'
-          : galleryKey === 'tajMahal'
-          ? 'Adéntrate en el monumento más romántico del mundo y déjate sorprender por su belleza eterna.'
-          : 'Explora la majestuosidad de las Cataratas Victoria, donde la naturaleza muestra todo su poder.'}
-      </p>
-      {/* Botón "Learn More" modificado para usar Link */}
-      <Link to={
-        galleryKey === 'torrePisa'
-          ? '/torre-de-pisa'
-          : galleryKey === 'tajMahal'
-          ? '/taj-mahal'
-          : '/cataratas-victoria'
-      }>
-        <button className={styles.learnButton}>Learn More</button>
-      </Link>
-      <div className={styles.featureGallery}>
-        {galleryImages.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`Imagen de galería ${index + 1}`}
-            onClick={() => openModal(galleryImages, img)}
-            className={styles.thumbnail}
-          />
+        {Object.entries(images).map(([galleryKey, galleryImages]) => (
+          <div key={galleryKey} className={styles.featureCard}>
+            <img
+              src={
+                galleryKey === 'torrePisa'
+                  ? image1
+                  : galleryKey === 'tajMahal'
+                  ? image2
+                  : image3
+              }
+              alt={`Foto de destino ${galleryKey}`}
+              onClick={() =>
+                openModal(
+                  galleryImages,
+                  galleryKey === 'torrePisa'
+                    ? image1
+                    : galleryKey === 'tajMahal'
+                    ? image2
+                    : image3
+                )
+              }
+            />
+            <h3>
+              {galleryKey === 'torrePisa'
+                ? 'Torre de Pisa'
+                : galleryKey === 'tajMahal'
+                ? 'Taj Mahal, India'
+                : 'Cataratas Victoria'}
+            </h3>
+            <p>
+              {galleryKey === 'torrePisa'
+                ? 'Descubre la historia detrás de la torre más inclinada del mundo y su enigmático encanto.'
+                : galleryKey === 'tajMahal'
+                ? 'Adéntrate en el monumento más romántico del mundo y déjate sorprender por su belleza eterna.'
+                : 'Explora la majestuosidad de las Cataratas Victoria, donde la naturaleza muestra todo su poder.'}
+            </p>
+            <Link
+              to={
+                galleryKey === 'torrePisa'
+                  ? '/torre-de-pisa'
+                  : galleryKey === 'tajMahal'
+                  ? '/taj-mahal'
+                  : '/cataratas-victoria'
+              }
+            >
+              <button className={styles.learnButton}>Learn More</button>
+            </Link>
+            <div className={styles.featureGallery}>
+              {galleryImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Imagen de galería ${index + 1}`}
+                  onClick={() => openModal(galleryImages, img)}
+                  className={styles.thumbnail}
+                />
+              ))}
+            </div>
+          </div>
         ))}
-      </div>
-    </div>
-  ))}
-</section>
+      </section>
 
 
       {/* Modal para la galería */}
