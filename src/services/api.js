@@ -6,7 +6,8 @@ const API_BASE_URL = 'https://6622071827fcd16fa6c8818c.mockapi.io/api/v1';
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/users`, userData);
-    return response.data;
+    // Devuelve el token o los datos de usuario, si está disponible en la respuesta
+    return response.data; 
   } catch (error) {
     console.error('Error registrando usuario:', error);
     return null;
@@ -23,7 +24,7 @@ export const loginUser = async (email, password) => {
       },
     });
     
-    // Verifica si el usuario existe
+    // Verifica si el usuario existe y devualve el primer usuario (mock)
     if (response.data.length > 0) {
       return response.data[0];
     } else {

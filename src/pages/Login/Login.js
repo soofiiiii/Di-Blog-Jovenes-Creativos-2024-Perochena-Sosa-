@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import { FaUser, FaLock } from 'react-icons/fa'; // Importar iconos
 
@@ -20,8 +21,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ email: '', password: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
-   // Validar email en tiempo real
+   // Validación de email
    const validateEmail = (email) => {
     if (!email) {
       return 'El campo de correo electrónico no puede estar vacío.';
@@ -32,7 +34,7 @@ const Login = () => {
     }
   };
 
-  // Validar contraseña en tiempo real
+  // Validación de contraseña
   const validatePassword = (password) => {
     if (!password) {
       return 'El campo de contraseña no puede estar vacío.';
@@ -68,22 +70,23 @@ const Login = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Validar antes de enviar
-    const emailError = validateEmail(email);
-    const passwordError = validatePassword(password);
+  // Validar antes de enviar
+  const emailError = validateEmail(email);
+  const passwordError = validatePassword(password);
     if (emailError || passwordError) {
       setErrors({ email: emailError, password: passwordError });
       setIsSubmitting(false);
       return;
-    }
+  }
 
-    const success = await login(email, password);
+  // Intentar iniciar sesión usando el contexto de autenticación
+  const success = await login(email, password);
     if (success) {
       console.log('Inicio de sesión exitoso');
-      // Redirigir al dashboard o a otra página
+      navigate('/');
     } else {
       alert('Credenciales incorrectas');
-    }
+  }
 
     setIsSubmitting(false);
   };
@@ -123,8 +126,8 @@ const Login = () => {
 
       {/* Login Section */}
       <div className={styles.container}>
-        <form onSubmit={handleLogin} className={styles.loginBox} aria-labelledby="login-title">
-          <h2 id="login-title" className={styles.title}>SIGN IN</h2>
+      <form onSubmit={handleLogin} className={styles.loginBox} aria-labelledby="login-title">
+        <h2 id="login-title" className={styles.title}>SIGN IN</h2>
 
           <div className={styles.inputContainer}>
             <div className={styles.inputWrapper}>

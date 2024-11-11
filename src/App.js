@@ -13,7 +13,11 @@ function App() {
       <Routes>
         {/* Ruta principal que muestra la Landing Page */}
         <Route path="/" element={<LandingPage />} />
-        
+
+        {/* Ruta para el login */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
         {/* Rutas específicas para cada destino */}
         <Route path="/torre-de-pisa" element={<TorreDePisa />} />
         <Route path="/taj-mahal" element={<TajMahal />} />

@@ -61,9 +61,7 @@
   color: #007bff; /* Cambiar color al pasar el cursor */
 }
 
-
 .searchContainer {
-  margin-left: auto; /* Deja espacio entre los enlaces y la barra de búsqueda */
   display: flex;
   align-items: center;
   position: relative;
@@ -145,6 +143,10 @@
   .nav-links.showMenu li:hover {
     background-color: #f0f0f0; /* Fondo gris claro al pasar el cursor */
   }
+
+  .searchContainer {
+    margin-left: 16rem; /* Espacio entre los enlaces y la barra de búsqueda para pantallas pequeñas */
+  }
 }
 
 /* Mostrar el menú completo en pantallas grandes */
@@ -155,6 +157,10 @@
 
   .hamburgerButton {
     display: none; /* Ocultar el botón hamburguesa */
+  }
+
+  .searchContainer {
+    margin-left: 26rem; /* Espacio entre los enlaces y la barra de búsqueda para pantallas grandes */
   }
 }
 

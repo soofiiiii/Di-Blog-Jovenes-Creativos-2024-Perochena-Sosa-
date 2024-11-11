@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 const Register = () => {
 
@@ -24,6 +25,7 @@ const Register = () => {
   const [errors, setErrors] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  
 
   // Validaciones
   const validateName = (name) => {
@@ -60,43 +62,6 @@ const Register = () => {
     return '';
   };
 
-  // Manejar cambios en los campos
-  const handleNameChange = (e) => {
-    const newName = e.target.value;
-    setName(newName);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      name: validateName(newName),
-    }));
-  };
-
-  const handleEmailChange = (e) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      email: validateEmail(newEmail),
-    }));
-  };
-
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: validatePassword(newPassword),
-    }));
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const newConfirmPassword = e.target.value;
-    setConfirmPassword(newConfirmPassword);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      confirmPassword: validateConfirmPassword(password, newConfirmPassword),
-    }));
-  };
-
   // Manejar el registro
   const handleRegister = async () => {
     setIsSubmitting(true);
@@ -113,6 +78,7 @@ const Register = () => {
       return;
     }
 
+    // Llamada a la función register del contexto
     const success = await register({ name, email, password });
     if (success) {
       console.log('Registro exitoso');
@@ -212,9 +178,9 @@ const Register = () => {
           </div>
           {errors.confirmPassword && <p className={styles.errorMessage}>{errors.confirmPassword}</p>}
         </div>
-        <button onClick={handleRegister} className={styles.button}>
-          Registrarse
-        </button>
+        <button onClick={handleRegister} className={styles.button} disabled={isSubmitting}>
+            Registrarse
+          </button>
       </div>
     </div>
     </div>

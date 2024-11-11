@@ -1,42 +1,57 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { registerUser, loginUser } from '../services/api';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = async (email, password) => {
-    try {
-      // Aquí se hace la llamada a la API con `axios` o `fetch`
-      const response = await fetch('https://6622071827fcd16fa6c8818c.mockapi.io/api/v1/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
 
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData);
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error('Error en el inicio de sesión', error);
-      return false;
-    }
+// Al cargar el contexto, revisa si hay un token en localSotage
+useEffect(() => {
+  const userId = localStorage.getItem('userId');
+  if (userId) {
+    setUser({ id: userId });
+  }
+}, []);
+
+
+// Función de login que guarda el token en localStorage tras un login exitoso
+const login = async (credentials) => {
+  const response = await loginUser(credentials.email, credentials.password);
+  if (response) {
+    const userId = response.id;
+
+    // Guardar el id del usuario en localStorage para simular una sesión
+    localStorage.setItem('userId', userId);
+    setUser({ id: userId });
+    return true;
+  }
+  return false;
+};
+
+// Función de registro para registrar al usuario y guardar el token
+const register = async (userData) => {
+  const response = await registerUser(userData);
+  if (response) {
+    const userId = response.id;
+    localStorage.setItem('userId', userId);
+    setUser({ id: userId });
+    return true;
+  }
+  return false;
+};
+
+  // Función de logout que elimina el token de localStorage 
+const logout = () => {
+    localStorage.removeItem('userId');
+    setUser(null);
   };
 
-  const register = async (userData) => {
-    // Lógica de registro (similar a `login`)
-  };
-
-  return (
-    <AuthContext.Provider value={{ user, login, register }}>
-      {children}
-    </AuthContext.Provider>
+return (
+  <AuthContext.Provider value={{ user, login, register, logout }}>
+    {children}
+  </AuthContext.Provider>
   );
 };
 
