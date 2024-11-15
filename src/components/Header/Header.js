@@ -67,7 +67,7 @@ const Header = () => {
             <Link to="/blog-de-viaje">BLOG DE VIAJE</Link>
           </li>
           <li onClick={toggleHamburgerMenu}>
-            <Link to="/">DESTINOS</Link>
+          <Link to="/destinos">DESTINOS</Link>
           </li>
           <li onClick={toggleHamburgerMenu}>
             <Link to="/guias">GUÍAS</Link>

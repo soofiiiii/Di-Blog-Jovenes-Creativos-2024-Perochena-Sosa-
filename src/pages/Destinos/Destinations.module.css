@@ -1,0 +1,80 @@
+
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f8f8;
+    font-family: 'Arial, sans-serif';
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .destinationsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .featureCard {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .mainImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .gallery {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .galleryImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  
+  .learnButton {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .learnButton:hover {
+    background-color: #0056b3;
+  }
