@@ -102,7 +102,7 @@ const LandingPage = () => {
               <Link to="/blog-de-viaje">BLOG DE VIAJE</Link>
             </li>
             <li onClick={() => setIsMenuOpen(false)}>
-              <Link to="/destinos">DESTINOS</Link>
+              <Link to="/dashboard">DESTINOS</Link>
             </li>
             <li onClick={() => setIsMenuOpen(false)}>
               <Link to="/guias">GUÍAS</Link>

@@ -16,6 +16,7 @@ const Login = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Definir los estados necesarios para el login
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -73,23 +74,28 @@ const Login = () => {
   // Validar antes de enviar
   const emailError = validateEmail(email);
   const passwordError = validatePassword(password);
-    if (emailError || passwordError) {
-      setErrors({ email: emailError, password: passwordError });
-      setIsSubmitting(false);
-      return;
+  if (emailError || passwordError) {
+    setErrors({ email: emailError, password: passwordError });
+    setIsSubmitting(false);
+    return;
   }
 
   // Intentar iniciar sesión usando el contexto de autenticación
-  const success = await login(email, password);
+  try {
+    const success = await login(email, password);
     if (success) {
-      console.log('Inicio de sesión exitoso');
-      navigate('/');
+        navigate('/');
+    }
+} catch (error) {
+    if (error.response && error.response.status === 404) {
+        setErrors({ email: "Usuario no encontrado." });
     } else {
-      alert('Credenciales incorrectas');
-  }
+        alert("Error al conectar con el servidor.");
+    }
+}
+  setIsSubmitting(false);
+};
 
-    setIsSubmitting(false);
-  };
 
   return (
     <div>
@@ -126,8 +132,8 @@ const Login = () => {
 
       {/* Login Section */}
       <div className={styles.container}>
-      <form onSubmit={handleLogin} className={styles.loginBox} aria-labelledby="login-title">
-        <h2 id="login-title" className={styles.title}>SIGN IN</h2>
+        <form onSubmit={handleLogin} className={styles.loginBox} aria-labelledby="login-title">
+          <h2 id="login-title" className={styles.title}>SIGN IN</h2>
 
           <div className={styles.inputContainer}>
             <div className={styles.inputWrapper}>

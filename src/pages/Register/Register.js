@@ -3,7 +3,6 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
-import { wait } from '@testing-library/user-event/dist/utils';
 
 const Register = () => {
 
@@ -79,12 +78,12 @@ const Register = () => {
     }
 
     // Llamada a la función register del contexto
-    const success = await register({ name, email, password });
-    if (success) {
+    const success = await register(name, email, password);
+    if (!success) {
+      setErrors({ general: "Credenciales incorrectas. Por favor, intenta de nuevo." });
+    } else {
       console.log('Registro exitoso');
       navigate('/');
-    } else {
-      alert('Error en el registro');
     }
 
     setIsSubmitting(false);
