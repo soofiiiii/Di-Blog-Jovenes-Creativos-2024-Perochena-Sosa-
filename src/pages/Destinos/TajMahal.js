@@ -1,57 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from '../../styles/DestinoPage.module.css'; // Archivo CSS común para todos los destinos
-
-// Importa la imagen principal
+import Header from '../../components/Header/Header';
+import AuthContext from '../../context/AuthContext';
 import mainImage from '../../assets/image2.jpg';
 
 const TajMahal = () => {
-  // Estado para la búsqueda
-  const [searchTerm, setSearchTerm] = useState('');
+  const { isAuth, user } = useContext(AuthContext); 
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
 
-  // Definir el estado del menú
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Desplazar hacia arriba cuando se monta el componente
+  // Cargar comentarios desde localStorage al montar el componente
   useEffect(() => {
     window.scrollTo(0, 0);
+    const storedComments = JSON.parse(localStorage.getItem('comments_taj_mahal')) || [];
+    setComments(storedComments);
   }, []);
+
+  // Manejar cambios en el campo de comentario
+  const handleCommentChange = (event) => {
+    setNewComment(event.target.value);
+  };
+
+  // Manejar la publicación de un nuevo comentario
+  const handleAddComment = () => {
+    if (!isAuth) {
+      alert("Debes iniciar sesión o registrarte para comentar.");
+      return;
+    }
+
+    const comment = {
+      id: Date.now(),
+      userName: user.name,
+      content: newComment,
+      timestamp: new Date().toLocaleString(),
+    };
+
+    const updatedComments = [...comments, comment];
+    setComments(updatedComments);
+    setNewComment('');
+
+    // Guardar los comentarios actualizados en localStorage
+    localStorage.setItem('comments_taj_mahal', JSON.stringify(updatedComments));
+  };
+
+  // Manejar la eliminación de un comentario
+  const handleDeleteComment = (commentId) => {
+    const updatedComments = comments.filter((comment) => comment.id !== commentId);
+    setComments(updatedComments);
+
+    // Actualizar localStorage con la nueva lista de comentarios
+    localStorage.setItem('comments_taj_mahal', JSON.stringify(updatedComments));
+  };
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <a href="/" className={styles.navTitle}>Di-Blog</a>
-        <div className={styles.searchContainer}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Buscar destinos, aventuras..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button className={styles.searchButton}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg>
-          </button>
-        </div>
-        <nav className={styles.nav}>
-          <button className={styles.hamburgerButton} onClick={toggleMenu}>
-            ☰
-          </button>
-          <ul className={`${styles['nav-links']} ${isMenuOpen ? styles.showMenu : ''}`}>
-            {['HOLA', 'BLOG DE VIAJE', 'DESTINOS', 'GUÍAS', 'SOBRE NOSOTROS'].map((link) => (
-              <li key={link} onClick={() => setIsMenuOpen(false)}>
-                {link}
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
+      {/* Header Importado */}
+      <Header />
 
       {/* Contenedor principal */}
       <div className={styles.mainContent}>
@@ -73,33 +78,47 @@ const TajMahal = () => {
           </p>
         </section>
 
-        {/* Sección de comentarios */}
-        <section className={styles.commentsSection}>
-          <h2 className={styles.commentsTitle}>89 comments</h2>
-          <button className={styles.signOutButton}>Sign Out</button>
-          <div className={styles.commentsSorting}>
-            <p>Sort By Newest</p>
-            <p>Jane Doe</p>
-          </div>
-          <div className={styles.commentInput}>
-            <input type="text" placeholder="Add a comment..." className={styles.commentBox} />
-            <button className={styles.postButton}>Post</button>
-          </div>
+       {/* Sección de comentarios */}
+       <section className={styles.commentsSection}>
+          <h2 className={styles.commentsTitle}>{comments.length} comentarios</h2>
+
+          {/* Comprobación de autenticación */}
+          {isAuth ? (
+            <div className={styles.commentInput}>
+              <input
+                type="text"
+                placeholder="Añade un comentario..."
+                value={newComment}
+                onChange={handleCommentChange}
+                className={styles.commentBox}
+              />
+              <button onClick={handleAddComment} className={styles.postButton}>Publicar</button>
+            </div>
+          ) : (
+            <p>Inicia sesión para dejar un comentario.</p>
+          )}
 
           {/* Lista de comentarios */}
           <div className={styles.commentsList}>
-            <div className={styles.comment}>
-              <p className={styles.commentUser}><strong>Sam Brown</strong> <span className={styles.commentTime}>· 3h</span></p>
-              <p className={styles.commentText}>
-                comentario de relleno sobre el Taj Mahal.
-              </p>
-            </div>
-            <div className={styles.comment}>
-              <p className={styles.commentUser}><strong>Anita Kapoor</strong></p>
-              <p className={styles.commentText}>
-                comentario de relleno 2 sobre el Taj Mahal.
-              </p>
-            </div>
+            {comments.map((comment) => (
+              <div key={comment.id} className={styles.comment}>
+                <p className={styles.commentUser}>
+                  <strong>{comment.userName = user.name}</strong> 
+                  <span className={styles.commentTime}> · {comment.timestamp}</span>
+                </p>
+                <p className={styles.commentText}>{comment.content}</p>
+
+                {/* Botón de eliminación (solo visible para el autor del comentario) */}
+                {isAuth && comment.userId === user.Id && (
+                  <button
+                    onClick={() => handleDeleteComment(comment.id)}
+                    className={styles.deleteButton}
+                  >
+                    Eliminar
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
         </section>
       </div>

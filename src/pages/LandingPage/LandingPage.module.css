@@ -72,20 +72,21 @@
 }
 
 .searchInput {
-  padding: 15px 20px;  /* Más padding para que se vea más grande */
-  font-size: 1.1rem;  /* Ajusta el tamaño del texto */
+  padding: 15px 20px;
+  font-size: 1.1rem;
   border: none;
-  border-radius: 25px;  /* Bordes redondeados completos */
+  border-radius: 25px;
   outline: none;
-  width: 500px;  /* Más ancho para que se vea mejor */
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con algo de transparencia */
-  color: #333;  /* Color del texto */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra para darle un efecto elevado */
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .searchInput::placeholder {
-  color: #999;  /* Color del placeholder */
+  color: #999;
 }
+
 
 .searchButton {
   margin-left: -50px;  /* Superponer el botón a la derecha del input */

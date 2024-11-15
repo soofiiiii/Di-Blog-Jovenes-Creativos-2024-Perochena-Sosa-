@@ -7,6 +7,7 @@ import TorreDePisa from './pages/Destinos/TorreDePisa';
 import TajMahal from './pages/Destinos/TajMahal';
 import CataratasVictoria from './pages/Destinos/CataratasVictoria';
 import Dashboard from './pages/Dashboard/Dashboard';
+import MyDestinations from './pages/MyDestinations/MyDestinations';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/mis-destinos" element={<MyDestinations />} />
 
         {/* Rutas específicas para cada destino */}
         <Route path="/torre-de-pisa" element={<TorreDePisa />} />

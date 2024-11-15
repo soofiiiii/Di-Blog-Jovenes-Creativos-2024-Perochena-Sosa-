@@ -44,11 +44,6 @@ const LandingPage = () => {
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Definir el estado del menú
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-
-
   // Sección de Métodos
 
   // Avanzar a la siguiente imagen
@@ -63,10 +58,6 @@ const LandingPage = () => {
     const currentIndex = currentGallery.indexOf(currentImage);
     const previousIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
     setCurrentImage(currentGallery[previousIndex]);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
   };
 
   // Galerías de imágenes para cada destino

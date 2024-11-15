@@ -32,6 +32,12 @@ const Header = () => {
     setIsAvatarMenuOpen(false); // Opcional: Cerrar el menú después de la navegación
   };
 
+  // Redirige a "Mis Destinos" cuando se selecciona esa opción
+  const handleMyDestinations = () => {
+    navigate('/mis-destinos');
+    setIsAvatarMenuOpen(false); // Opcional: Cerrar el menú después de la navegación
+  };
+
   // Cierra el menú del avatar si se hace clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -79,7 +85,7 @@ const Header = () => {
               <div className={styles.dropdownMenu}>
                 <button className={styles.closeButton} onClick={toggleAvatarMenu}>✕</button>
                 <p>AJUSTES <span className={styles.arrow}>›</span></p>
-                <p>MIS BLOGS <span className={styles.arrow}>›</span></p>
+                <p onClick={handleMyDestinations}>MIS DESTINOS <span className={styles.arrow}>›</span></p>
                 <p onClick={handleCreateDestino}>CREAR DESTINO <span className={styles.arrow}>›</span></p>
                 <p>AMIGOS <span className={styles.arrow}>›</span></p>
                 <button onClick={handleLogout} className={styles.logoutButton}>Cerrar Sesión</button>

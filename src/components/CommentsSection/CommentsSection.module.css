@@ -1,0 +1,41 @@
+/* src/components/CommentsSection.module.css */
+
+.commentsSection {
+    margin-top: 20px;
+  }
+  
+  .commentForm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .commentInput {
+    flex: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .postButton {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .commentList {
+    margin-top: 20px;
+  }
+  
+  .comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .comment p {
+    margin: 5px 0;
+  }
+  
