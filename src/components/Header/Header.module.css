@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400&display=swap');
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #6c9ded;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  color: #ffffff; /* Color blanco */
+  text-decoration: none; /* Sin subrayado */
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+}
+
+.navLinks li {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+}
+
+.navLinks li a {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff; /* Color blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    transition: color 0.3s ease;
+  }
+  
+  .navLinks li a:hover {
+    color: #007bff; /* Cambia el color al pasar el cursor */
+    text-decoration: none; /* Asegura que el subrayado no aparezca en el hover */
+  }
+
+.hamburgerButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+.authLinks {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .authLink {
+    color: #ffffff; /* Color del texto en blanco */
+    background-color: transparent; /* Fondo transparente */
+    padding: 8px 15px; /* Espaciado interno */
+    border: 2px solid #ffffff; /* Borde blanco */
+    border-radius: 20px; /* Bordes ovalados */
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .authLink:hover {
+    background-color: #ffffff; /* Fondo blanco al pasar el cursor */
+    color: #007bff; /* Color del texto al pasar el cursor */
+  }
+  
+  
+
+@media screen and (max-width: 768px) {
+    .navLinks {
+      display: none;
+    }
+  
+    .hamburgerButton {
+      display: block;
+    }
+  
+    .navLinks.showMenu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+  
+    .navLinks.showMenu li {
+      margin: 4px 0;
+      color: #333;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+
+
+  .avatarContainer {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatarIcon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: 60px; /* Ajusta la distancia desde el avatar */
+    right: -20px; /* Alineación al extremo derecho */
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    height: 300px;
+    z-index: 10;
+    text-align: left;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .dropdownMenu p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0; /* Espacio entre los enlaces */
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .dropdownMenu p:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+  
+  .arrow {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .logoutButton {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Aumenta el padding para hacer el botón más grande */
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 25px;
+  }
+
+
+.logoutButton:hover {
+    background-color: #3b78bc; /* Color de fondo ligeramente más claro al pasar el cursor */
+  }

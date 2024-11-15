@@ -1,7 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import styles from './Dashboard.module.css';
+import AuthContext from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+
+  const {isAuth} = useContext(AuthContext);
+  const navigate = useNavigate();
     
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +20,7 @@ const Dashboard = () => {
   const [mainImage, setMainImage] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
   const [commentsEnabled, setCommentsEnabled] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const mainImageInputRef = useRef(null);
   const galleryImagesInputRef = useRef(null);
@@ -37,18 +43,18 @@ const Dashboard = () => {
         return;
     }
 
-        const file = event.target.files[0]; // Solo una imagen a la vez
-        if (file) {
-            const newImage = URL.createObjectURL(file);
+  const file = event.target.files[0]; 
+    if (file) {
+      const newImage = URL.createObjectURL(file);
 
-            setGalleryImages((prevImages) => {
-                if (prevImages.length < 4) {
-                    return [...prevImages, newImage];
-                }
-                return prevImages;
-            });
+      setGalleryImages((prevImages) => {
+        if (prevImages.length < 4) {
+          return [...prevImages, newImage];
         }
-    };
+          return prevImages;
+      });
+    }
+  };
 
   const removeGalleryImage = (index) => {
     setGalleryImages(prevImages => prevImages.filter((_, i) => i !== index));
@@ -56,11 +62,19 @@ const Dashboard = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isAuth) {
+      setShowModal(true); // Mostrar el modal si el usuario no está autenticado
+      return;
+    }
     if (!title || !description || !mainImage || galleryImages.length !== 4) {
       alert('Todos los campos son obligatorios, incluyendo las imágenes');
       return;
     }
     alert('Destino turístico creado con éxito');
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
   };
   
     return (
@@ -213,11 +227,23 @@ const Dashboard = () => {
                 </div>
 
                 <div className={styles.submitButtonContainer}>
-                <button type="submit" className={styles.submitButton}>Crear Destino</button>
-                </div>
-            </form>
-            </div>
+            <button type="submit" className={styles.submitButton}>Crear Destino</button>
+          </div>
+        </form>
+      </div>
 
+      {/* Modal para usuarios no autenticados */}
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>¡Espera!</h2>
+            <p>Debes registrarte o iniciar sesión para crear un destino.</p>
+            <button onClick={() => navigate('/login')}>Iniciar Sesión</button>
+            <button onClick={() => navigate('/register')}>Registrarse</button>
+            <button onClick={handleModalClose}>Volver al sitio</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

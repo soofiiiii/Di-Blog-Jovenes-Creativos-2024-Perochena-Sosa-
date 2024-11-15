@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from 'react-modal';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 import styles from './LandingPage.module.css';
-import { Link } from 'react-router-dom';
 import "react-image-gallery/styles/css/image-gallery.css";
+import Header from '../../components/Header/Header';
+
 
 // Importaciones de imágenes
 import image1 from '../../assets/image1.jpg';
@@ -27,6 +30,9 @@ import galleryImage12 from '../../assets/gallery12.jpg';
 
 
 const LandingPage = () => {
+
+  const { isAuth, user, logout } = useContext(AuthContext); // Accede al contexto
+  const navigate = useNavigate();
 
   // Sección de Estados
 
@@ -85,37 +91,8 @@ const LandingPage = () => {
 
   return (
     <div className={styles.container}>
-       {/* Header */}
-      <header className={styles.header}>
-        {/* Link para redirigir a la landing page */}
-        <Link to="/" className={styles.navTitle}>Di-Blog</Link>
-
-        <nav className={styles.nav}>
-          <button className={styles.hamburgerButton} onClick={toggleMenu}>
-            ☰
-          </button>
-          <ul className={`${styles['nav-links']} ${isMenuOpen ? styles.showMenu : ''}`}>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <Link to="/">HOLA</Link>
-            </li>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <Link to="/blog-de-viaje">BLOG DE VIAJE</Link>
-            </li>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <Link to="/dashboard">DESTINOS</Link>
-            </li>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <Link to="/guias">GUÍAS</Link>
-            </li>
-            <li onClick={() => setIsMenuOpen(false)}>
-              <Link to="/sobre-nosotros">SOBRE NOSOTROS</Link>
-            </li>
-            {/* Agrega el link al inicio de sesión */}
-            <Link to="/login">Iniciar Sesión</Link>
-            <Link to="/register">Registrarse</Link>
-          </ul>
-        </nav>
-      </header>
+     {/* Header Importado */}
+     <Header />
     
 
       {/* Hero Section */}
@@ -128,7 +105,7 @@ const LandingPage = () => {
               className={styles.searchInput}
               placeholder="Buscar destinos, aventuras..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Permite escribir en el campo
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <button className={styles.searchButton}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
