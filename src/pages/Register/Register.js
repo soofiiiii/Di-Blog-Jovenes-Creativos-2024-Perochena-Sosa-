@@ -129,7 +129,7 @@ const Register = () => {
           <div className={styles.inputWrapper}>
             <FaUser className={styles.icon} />
             <input
-              type="text"
+              type="Nombre"
               placeholder="Nombre"
               value={name}
               onChange={(e) => setName(e.target.value)}

@@ -1,3 +1,5 @@
+@import '../../styles/Responsive.module.css';
+
 .container {
   width: 100%;
   padding: 0;
@@ -127,3 +129,90 @@ h2 {
   background-color: #e74c3c;
   color: #fff;
 }
+
+/*Inicio de los @media*/
+
+@media screen and (max-width: 768px) {
+  .mydestinations-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .destination-card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .filter-container {
+    display: none; /* Ocultar los filtros en pantallas pequeñas */
+  }
+
+  .add-button {
+    width: 80%;
+    margin-top: 15px;
+  }
+}
+
+/* Ajustes para celulares pequeños (max-width de 480px) */
+@media screen and (max-width: 480px) {
+  .mydestinations-container {
+    padding: 10px;
+  }
+
+  .destination-card {
+    margin-bottom: 15px;
+  }
+
+  .add-button {
+    font-size: 1.2rem; /* Aumentar el tamaño del botón para facilidad de uso */
+  }
+}
+
+/* Ajustes para tabletas (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .filter-container {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .destination-card {
+    width: 80%;
+  }
+}
+
+/* Ajustes para computadoras portátiles (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .mydestinations-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .destination-card {
+    width: 45%;
+    margin-bottom: 25px;
+  }
+
+  .filter-container {
+    display: block;
+  }
+}
+
+/* Ajustes para monitores grandes (más de 1024px) */
+@media screen and (min-width: 1025px) {
+  .mydestinations-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+
+  .destination-card {
+    width: 30%;
+    margin-bottom: 30px;
+  }
+
+  .filter-container {
+    display: block;
+    width: 25%;
+  }
+}
+/*Fin para los @medias*/

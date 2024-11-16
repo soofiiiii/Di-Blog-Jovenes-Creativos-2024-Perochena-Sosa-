@@ -6,7 +6,6 @@ import styles from './LandingPage.module.css';
 import "react-image-gallery/styles/css/image-gallery.css";
 import Header from '../../components/Header/Header';
 
-
 // Importaciones de imágenes
 import image1 from '../../assets/image1.jpg';
 import image2 from '../../assets/image2.jpg';

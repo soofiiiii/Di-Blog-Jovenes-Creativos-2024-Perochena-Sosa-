@@ -1,5 +1,6 @@
 /* LandingPage.module.css */
 
+@import '../../styles/Responsive.module.css';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400&display=swap');
 
 .container {
@@ -10,17 +11,35 @@
   font-family: 'Arial, sans-serif';
 }
 
+.landing-page {
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden; /* Evita el desplazamiento horizontal */
+  box-sizing: border-box; /* Asegura que el padding no genere un ancho extra */
+}
+
 .heroSection {
-  width: 100vw;  /* Para asegurarse de que ocupe todo el ancho de la ventana */
-  height: 400px;  /* Ajusta la altura según tu diseño */
+  width: 100%; /* Ajusta el ancho para evitar el desplazamiento horizontal */
+  height: 400px; /* Ajusta la altura según tu diseño */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   text-align: center;
   padding: 50px 20px;
-  margin-top: 0px; /* Aumenta el espacio entre la barra de navegación y la imagen */
+  margin-top: 0px;
   color: #000000;
-  position: relative; /* Asegura que los elementos hijos se posicionen dentro del contenedor */
+  position: relative;
+  box-sizing: border-box; /* Asegura que el padding no genere un ancho extra */
+}
+
+.landing-page .main-image {
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+  height: auto; /* Mantén la proporción de la imagen */
+  object-fit: cover; /* Recorta la imagen para evitar bordes de desplazamiento */
 }
 
 .heroSection::before {
@@ -179,6 +198,7 @@
   border-radius: 10px;
 }
 
+/*Inicio Sección para las @medias*/
 
 @media (max-width: 768px) {
   .features {
@@ -195,6 +215,102 @@
     display: none; /* Ocultar el menú por defecto en pantallas pequeñas */
   }
 }
+
+/* Estilo para celulares (max-width de 480px) */
+@media (max-width: 480px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .featureCard {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+
+  .navList {
+    display: none; /* Ocultar el menú por defecto en pantallas pequeñas */
+  }
+}
+
+/* Estilo para tabletas (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .featureCard {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .navList {
+    display: none; /* Ocultar el menú en tabletas */
+  }
+}
+
+/* Estilo para computadoras (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .features {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .featureCard {
+    width: 45%;
+    margin-bottom: 25px;
+  }
+
+  .navList {
+    display: flex; /* Mostrar el menú en computadoras */
+  }
+}
+
+/* Estilo para monitores grandes (más de 1024px) */
+@media (min-width: 1025px) {
+  .features {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .featureCard {
+    width: 30%;
+    margin-bottom: 30px;
+  }
+
+  .navList {
+    display: flex; /* Menú visible en pantallas grandes */
+  }
+}
+
+/* Estilo para resoluciones muy pequeñas (máximo 360px) */
+@media (max-width: 360px) {
+  .navContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navButton {
+    width: 90%;  /* Ajustar el ancho para asegurarse de que los botones no queden demasiado juntos */
+    margin: 5px 0; /* Añadir un margen para evitar la superposición */
+  }
+
+  .logo {
+    font-size: 1.5em; /* Ajustar el tamaño del logo para que no ocupe demasiado espacio */
+    text-align: center; /* Centrar el logo */
+  }
+}
+
+/*Fin Sección para las @medias*/
 
 /* Estilo general del Modal */
 .modal {

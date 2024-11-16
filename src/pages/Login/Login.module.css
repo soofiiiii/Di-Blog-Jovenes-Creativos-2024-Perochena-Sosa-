@@ -1,4 +1,7 @@
 /* Login.module.css */
+
+@import '../../styles/Responsive.module.css';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -109,6 +112,8 @@
   color: #fff;
 }
 
+/*Inicio para los medias*/
+
 /* Mostrar el ícono del menú hamburguesa solo en pantallas pequeñas */
 @media screen and (max-width: 768px) {
   .nav-links {
@@ -151,21 +156,73 @@
   }
 }
 
-/* Mostrar el menú completo en pantallas grandes */
-@media screen and (min-width: 769px) {
-  .nav-links {
-    display: flex; /* Mostrar el menú completo en pantallas grandes */
+/* Ajustes para celulares pequeños (max-width de 480px) */
+@media screen and (max-width: 480px) {
+  .nav-links.showMenu {
+    top: 50px; /* Ajustar la posición del menú para pantallas más pequeñas */
+    padding: 15px;
+  }
+
+  .nav-links.showMenu li {
+    margin: 6px 0;
   }
 
   .hamburgerButton {
-    display: none; /* Ocultar el botón hamburguesa */
+    font-size: 1.2rem; /* Aumentar el tamaño del botón para facilidad de uso */
   }
 
   .searchContainer {
-    margin-left: 27rem; /* Espacio entre los enlaces y la barra de búsqueda para pantallas grandes */
+    margin-left: 0; /* Eliminar el margen en pantallas muy pequeñas */
+    width: 100%; /* Asegurar que la barra de búsqueda ocupe todo el ancho disponible */
   }
 }
 
+/* Ajustes para tabletas (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .nav-links.showMenu {
+    padding: 20px;
+  }
+
+  .nav-links.showMenu li {
+    margin: 8px 0;
+  }
+
+  .searchContainer {
+    margin-left: 8rem; /* Ajustar el margen para tabletas */
+  }
+}
+
+/* Ajustes para computadoras portátiles (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .hamburgerButton {
+    display: none; /* Ocultar el botón de menú hamburguesa en pantallas más grandes */
+  }
+
+  .searchContainer {
+    margin-left: 10rem; /* Ajustar el margen para computadoras portátiles */
+  }
+}
+
+/* Ajustes para monitores grandes (más de 1024px) */
+@media screen and (min-width: 1025px) {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .searchContainer {
+    margin-left: 20rem; /* Espacio adicional para pantallas grandes */
+  }
+}
+
+/*Fin para de los @medias*/
 
 .loginBox {
   background-color: white;

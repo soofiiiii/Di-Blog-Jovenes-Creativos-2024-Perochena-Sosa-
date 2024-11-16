@@ -1,3 +1,5 @@
+@import '../../styles/Responsive.module.css';
+
 /* Contenedor principal de la página */
 .container {
     width: 90%; /* Ancho completo de la pantalla */
