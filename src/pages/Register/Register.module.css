@@ -189,6 +189,8 @@
   transition: background-color 0.3s;
 }
 
+
+
 .button:hover {
   background-color: #005fa3;
 }
@@ -214,6 +216,12 @@
   margin-left: 3rem; /* Alinea el mensaje de error con el input */
 }
 
+/*Posible mejora estatica
+.errorMessage::before {
+  content: '❗️ ';
+  margin-right: 0.5rem;
+}
+*/
 
 /*Inicio para los @medias*/
 

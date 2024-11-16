@@ -1,7 +1,5 @@
 /* Login.module.css */
 
-@import '../../styles/Responsive.module.css';
-
 .container {
   display: flex;
   flex-direction: column;

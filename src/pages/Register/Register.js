@@ -28,26 +28,31 @@ const Register = () => {
 
   // Validaciones
   const validateName = (name) => {
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,}$/;
     if (!name) {
       return 'El campo de nombre no puede estar vacío.';
+    } else if (!regex.test(name)) {
+      return 'El nombre solo puede contener letras y espacios, con al menos 2 caracteres.';
     }
     return '';
   };
 
   const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email) {
       return 'El campo de correo electrónico no puede estar vacío.';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    } else if (!regex.test(email)) {
       return 'Por favor, introduce un correo electrónico válido.';
     }
     return '';
   };
 
   const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!password) {
       return 'El campo de contraseña no puede estar vacío.';
-    } else if (password.length < 6) {
-      return 'La contraseña debe tener al menos 6 caracteres.';
+    } else if (!regex.test(password)) {
+      return 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, un número y un carácter especial.';
     }
     return '';
   };
@@ -64,20 +69,18 @@ const Register = () => {
   // Manejar el registro
   const handleRegister = async () => {
     setIsSubmitting(true);
-
-    // Validar antes de enviar
+  
     const nameError = validateName(name);
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
     const confirmPasswordError = validateConfirmPassword(password, confirmPassword);
-
+  
     if (nameError || emailError || passwordError || confirmPasswordError) {
       setErrors({ name: nameError, email: emailError, password: passwordError, confirmPassword: confirmPasswordError });
       setIsSubmitting(false);
       return;
     }
-
-    // Llamada a la función register del contexto
+  
     const success = await register(name, email, password);
     if (!success) {
       setErrors({ general: "Credenciales incorrectas. Por favor, intenta de nuevo." });
@@ -85,7 +88,7 @@ const Register = () => {
       console.log('Registro exitoso');
       navigate('/');
     }
-
+  
     setIsSubmitting(false);
   };
 

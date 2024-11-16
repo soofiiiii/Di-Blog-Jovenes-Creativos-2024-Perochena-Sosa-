@@ -5,7 +5,6 @@ import styles from './Login.module.css';
 import { FaUser, FaLock } from 'react-icons/fa'; // Importar iconos
 
 const Login = () => {
-
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -24,78 +23,68 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-   // Validación de email
-   const validateEmail = (email) => {
+  // Validación de email con regex robusto
+  const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email) {
       return 'El campo de correo electrónico no puede estar vacío.';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    } else if (!regex.test(email)) {
       return 'Por favor, introduce un correo electrónico válido.';
-    } else {
-      return '';
     }
+    return '';
   };
 
   // Validación de contraseña
   const validatePassword = (password) => {
     if (!password) {
       return 'El campo de contraseña no puede estar vacío.';
-    } else if (password.length < 6) {
-      return 'La contraseña debe tener al menos 6 caracteres.';
-    } else {
-      return '';
+    } else if (password.length < 8) {
+      return 'La contraseña debe tener al menos 8 caracteres.';
+    }
+    return '';
+  };
+
+  // Manejar cambios de entrada centralizados
+  const handleInputChange = (e, field) => {
+    const value = e.target.value;
+    if (field === 'email') {
+      setEmail(value);
+      setErrors((prevErrors) => ({ ...prevErrors, email: validateEmail(value) }));
+    } else if (field === 'password') {
+      setPassword(value);
+      setErrors((prevErrors) => ({ ...prevErrors, password: validatePassword(value) }));
     }
   };
 
-  // Manejar cambios en el email
-  const handleEmailChange = (e) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      email: validateEmail(newEmail),
-    }));
-  };
-
-  // Manejar cambios en la contraseña
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: validatePassword(newPassword),
-    }));
-  };
-
-  // Manejar el envío del formulario de login
+  // Envío del formulario
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-  // Validar antes de enviar
-  const emailError = validateEmail(email);
-  const passwordError = validatePassword(password);
-  if (emailError || passwordError) {
-    setErrors({ email: emailError, password: passwordError });
-    setIsSubmitting(false);
-    return;
-  }
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
 
-  // Intentar iniciar sesión usando el contexto de autenticación
-  try {
-    const success = await login(email, password);
-    if (success) {
+    if (emailError || passwordError) {
+      setErrors({ email: emailError, password: passwordError });
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const success = await login(email, password);
+      if (success) {
         navigate('/');
+      } else {
+        setErrors({ email: 'Credenciales incorrectas.', password: '' });
+      }
+    } catch (error) {
+      setErrors({
+        email: '',
+        password: 'Error al conectar con el servidor. Por favor, intenta más tarde.',
+      });
     }
-} catch (error) {
-    if (error.response && error.response.status === 404) {
-        setErrors({ email: "Usuario no encontrado." });
-    } else {
-        alert("Error al conectar con el servidor.");
-    }
-}
-  setIsSubmitting(false);
-};
-
+    setIsSubmitting(false);
+  };
 
   return (
     <div>
@@ -142,7 +131,7 @@ const Login = () => {
                 type="email"
                 placeholder="Correo electrónico"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e) => handleInputChange(e, 'email')} // Actualizado aquí
                 className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
               />
             </div>
@@ -156,7 +145,7 @@ const Login = () => {
                 type="password"
                 placeholder="Contraseña"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e) => handleInputChange(e, 'password')} // Actualizado aquí
                 className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
               />
             </div>
