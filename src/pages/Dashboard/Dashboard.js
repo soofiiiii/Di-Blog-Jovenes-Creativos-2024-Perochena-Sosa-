@@ -3,6 +3,7 @@ import styles from './Dashboard.module.css';
 import AuthContext from '../../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const Dashboard = () => {
   const { isAuth, user } = useContext(AuthContext);
@@ -186,6 +187,8 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+      {/* Footer Importado */}
+    <Footer />
     </div>
   );
 };

@@ -63,15 +63,11 @@ const Header = () => {
 
         {/* Enlaces de navegación */}
         <ul className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
-          <li onClick={toggleHamburgerMenu}>
-            <Link to="/blog-de-viaje">BLOG DE VIAJE</Link>
-          </li>
+          
           <li onClick={toggleHamburgerMenu}>
           <Link to="/destinos">DESTINOS</Link>
           </li>
-          <li onClick={toggleHamburgerMenu}>
-            <Link to="/guias">GUÍAS</Link>
-          </li>
+          
           <li onClick={toggleHamburgerMenu}>
             <Link to="/sobre-nosotros">SOBRE NOSOTROS</Link>
           </li>

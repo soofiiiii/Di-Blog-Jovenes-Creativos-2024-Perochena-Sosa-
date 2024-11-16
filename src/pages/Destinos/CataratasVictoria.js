@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styles from '../../styles/DestinoPage.module.css'; // Archivo CSS común para todos los destinos
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import AuthContext from '../../context/AuthContext';
 // Importa la imagen principal
 import mainImage from '../../assets/image3.jpg';
@@ -121,7 +122,10 @@ const CataratasVictoria = () => {
             ))}
           </div>
         </section>
+        
       </div>
+       {/* Footer Importado */}
+    <Footer />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Destinations.module.css'; 
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const Destinations = () => {
   const [publicDestinations, setPublicDestinations] = useState([]);
@@ -51,7 +52,10 @@ const Destinations = () => {
           )}
         </div>
       </div>
+      {/* Footer Importado */}
+    <Footer />
     </div>
+
   );
 };
 

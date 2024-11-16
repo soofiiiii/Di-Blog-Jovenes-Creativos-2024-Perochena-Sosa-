@@ -5,6 +5,8 @@ import AuthContext from '../../context/AuthContext';
 import styles from './LandingPage.module.css';
 import "react-image-gallery/styles/css/image-gallery.css";
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+
 
 // Importaciones de imágenes
 import image1 from '../../assets/image1.jpg';
@@ -212,6 +214,8 @@ const LandingPage = () => {
         )}
       </Modal>
 
+        {/* Footer Importado */}
+    <Footer />
     </div>
   );
 };

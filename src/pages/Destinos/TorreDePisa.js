@@ -3,6 +3,7 @@ import styles from '../../styles/DestinoPage.module.css';
 import Header from '../../components/Header/Header';
 import AuthContext from '../../context/AuthContext';
 import mainImage from '../../assets/image1.jpg';
+import Footer from '../../components/Footer/Footer';
 
 const TorrePisa = () => {
   const { isAuth, user } = useContext(AuthContext); 
@@ -112,6 +113,8 @@ const TorrePisa = () => {
           </div>
         </section>
       </div>
+      {/* Footer Importado */}
+    <Footer />
     </div>
   );
 };

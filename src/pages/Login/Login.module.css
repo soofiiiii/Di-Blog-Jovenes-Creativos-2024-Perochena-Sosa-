@@ -1,4 +1,10 @@
-/* Login.module.css */
+.containerLogin {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f8f8;
+  font-family: 'Arial, sans-serif';
+}
 
 .container {
   display: flex;

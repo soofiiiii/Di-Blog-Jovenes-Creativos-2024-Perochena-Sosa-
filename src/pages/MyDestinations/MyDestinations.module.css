@@ -1,17 +1,18 @@
 
 .container {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  background-color: #f8f8f8;
-  font-family: 'Arial, sans-serif';
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* La altura mínima será igual a la ventana */
 }
 
 .content {
+  flex: 1; /* Esto hace que el contenido principal ocupe todo el espacio disponible */
+  padding: 20px; /* Espaciado interno para el contenido */
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
 }
+
 
 h2 {
   font-size: 2rem;

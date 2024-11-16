@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import styles from './MyDestinations.module.css';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const MyDestinations = () => {
   const { user } = useContext(AuthContext);
@@ -76,6 +77,7 @@ const MyDestinations = () => {
   return (
     <div className={styles.container}>
       <Header />
+      
       <div className={styles.content}>
         <h2>Mis Destinos</h2>
         {userDestinations.length > 0 ? (
@@ -117,6 +119,8 @@ const MyDestinations = () => {
           </div>
         </div>
       )}
+      {/* Footer Importado */}
+    <Footer />
     </div>
   );
 };

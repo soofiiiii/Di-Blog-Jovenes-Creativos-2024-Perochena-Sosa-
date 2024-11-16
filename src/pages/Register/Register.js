@@ -3,6 +3,9 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import Header from '../../components/Header/Header';
+
+
 
 const Register = () => {
 
@@ -93,37 +96,10 @@ const Register = () => {
   };
 
   return (
-    <div>
-        {/* Header */}
-        <header className={styles.header}>
-          <a href="/" className={styles.navTitle}>Di-Blog</a>
-          <div className={styles.searchContainer}>
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder="Buscar destinos, aventuras..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button className={styles.searchButton}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg>
-            </button>
-          </div>
-          <nav className={styles.nav}>
-            <button className={styles.hamburgerButton} onClick={toggleMenu}>
-              ☰
-            </button>
-            <ul className={`${styles['nav-links']} ${isMenuOpen ? styles.showMenu : ''}`}>
-              {['HOLA', 'BLOG DE VIAJE', 'DESTINOS', 'GUÍAS', 'SOBRE NOSOTROS'].map((link) => (
-                <li key={link} onClick={() => setIsMenuOpen(false)}>
-                  {link}
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </header>
+    <div className={styles.containerRegister}>
+     {/* Header Importado */}
+     <Header />
+    
 
         <div className={styles.container}>
       <div className={styles.registerBox}>
