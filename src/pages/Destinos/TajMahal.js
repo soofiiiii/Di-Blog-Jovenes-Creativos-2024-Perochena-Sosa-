@@ -109,15 +109,7 @@ const TajMahal = () => {
                 </p>
                 <p className={styles.commentText}>{comment.content}</p>
 
-                {/* Botón de eliminación (solo visible para el autor del comentario) */}
-                {isAuth && comment.userId === user.Id && (
-                  <button
-                    onClick={() => handleDeleteComment(comment.id)}
-                    className={styles.deleteButton}
-                  >
-                    Eliminar
-                  </button>
-                )}
+               
               </div>
             ))}
           </div>

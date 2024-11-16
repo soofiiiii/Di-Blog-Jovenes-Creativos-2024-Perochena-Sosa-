@@ -41,6 +41,16 @@ const CommentsSection = ({ destinationId }) => {
     localStorage.setItem('comments', JSON.stringify(storedComments));
   };
 
+  const handleDeleteComment = (commentId) => {
+    const updatedComments = comments.filter(comment => comment.id !== commentId);
+    setComments(updatedComments);
+
+    // Guardar los comentarios actualizados en localStorage
+    const storedComments = JSON.parse(localStorage.getItem('comments')) || {};
+    storedComments[destinationId] = updatedComments;
+    localStorage.setItem('comments', JSON.stringify(storedComments));
+  };
+
   return (
     <div className={styles.commentsSection}>
       <h3>{comments.length} Comentarios</h3>
@@ -59,14 +69,7 @@ const CommentsSection = ({ destinationId }) => {
         <p>Inicia sesión para dejar un comentario.</p>
       )}
 
-      <div className={styles.commentList}>
-        {comments.map((comment) => (
-          <div key={comment.id} className={styles.comment}>
-            <p><strong>{comment.userName}</strong> · {comment.timestamp}</p>
-            <p>{comment.content}</p>
-          </div>
-        ))}
-      </div>
+      
     </div>
   );
 };

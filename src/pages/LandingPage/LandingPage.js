@@ -93,12 +93,13 @@ const LandingPage = () => {
           <h1 className={styles.title}>Di-Blog</h1>
           <p className={styles.subTitle}>Learn More</p>
           <div className={styles.searchContainer}>
-            <input type="text"
+            <input   type="searchInput"
               className={styles.searchInput}
               placeholder="Buscar destinos, aventuras..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+
             <button className={styles.searchButton}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />

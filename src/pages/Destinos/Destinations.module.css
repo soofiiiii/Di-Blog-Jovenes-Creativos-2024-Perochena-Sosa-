@@ -1,82 +1,234 @@
 
+
 .container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* La altura mínima será igual a la ventana */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f8f8;
+  font-family: 'Arial, sans-serif';
 }
 
+
 .content {
-  flex: 1; /* Esto hace que el contenido principal ocupe todo el espacio disponible */
-  padding: 20px; /* Espaciado interno para el contenido */
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.destinationsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.featureCard {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  padding: 1rem;
   text-align: center;
 }
 
-  
-  h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .destinationsList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .featureCard {
-    width: 300px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .mainImage {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  h3 {
-    font-size: 1.5rem;
-    margin-top: 10px;
-  }
-  
-  p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
+.mainImage {
+  width: 100%;
+  height: 450px; /* Igual que en LandingPage */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.gallery {
+  display: grid; /* Cambio a cuadrícula */
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas, igual que en LandingPage */
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+
+.galleryImage {
+  width: 100%;
+  height: 120px; /* Igual que en LandingPage */
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.galleryImage:hover {
+  transform: scale(1.05); /* Efecto de zoom */
+}
+
+
+.learnButton {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.learnButton:hover {
+  background-color: #0056b3;
+}
+
+/* Añadir al final de Destinations.module.css */
+
+
+/* Estilo general del Modal */
+.modal {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 80%;
+max-width: 800px;
+height: auto;
+background: transparent;
+padding: 0;
+border-radius: 10px;
+box-shadow: none;
+z-index: 1000;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.8);
+z-index: 999;
+}
+
+
+/* Estilo de la imagen en el modal */
+.modalContent {
+display: flex;
+flex-direction: column;
+align-items: center;
+background: none;
+}
+
+
+.modalImage {
+max-width: 100%;
+max-height: 80vh;
+object-fit: contain;
+margin-bottom: 10px;
+border-radius: 10px;
+}
+
+
+/* Miniaturas debajo de la imagen principal */
+.thumbnailContainer {
+display: flex;
+gap: 10px;
+overflow-x: auto;
+}
+
+
+.thumbnail {
+width: 60px;
+height: 60px;
+cursor: pointer;
+object-fit: cover;
+border-radius: 5px;
+transition: transform 0.3s ease;
+}
+
+
+.thumbnail:hover {
+transform: scale(1.1);
+box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+
+/* Botones de navegación del modal */
+.arrowButton {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(0, 0, 0, 0.5);
+border: none;
+color: white;
+font-size: 2rem;
+padding: 0.5rem;
+cursor: pointer;
+z-index: 1000;
+transition: background-color 0.3s ease;
+}
+
+
+.arrowButton:hover {
+background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.arrowLeft {
+left: 10px;
+}
+
+
+.arrowRight {
+right: 10px;
+}
+
+
+.closeButton {
+position: absolute;
+top: 10px;
+right: 10px;
+background: transparent;
+border: none;
+color: #fff;
+font-size: 24px;
+cursor: pointer;
+}
+
+
+.closeButton:hover {
+transform: scale(1.2);
+background: rgba(0, 0, 0, 0.8);
+}
+
+
+
+
+@media (max-width: 768px) {
   .gallery {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
   }
-  
-  .galleryImage {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
   }
-  
-  .learnButton {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .learnButton:hover {
-    background-color: #0056b3;
-  }
+}
