@@ -1,0 +1,337 @@
+.containerLogin {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f8f8;
+  font-family: 'Arial, sans-serif';
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  background-color: #f0f4f7;
+}
+
+/* Contenedor principal del header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #6c9ded;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Título del nav */
+.navTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+  text-decoration: none;
+}
+
+.nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Lista de links del nav */
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px; /* Espaciado entre los enlaces y la barra de búsqueda */
+  align-items: center; /* Alinea verticalmente los elementos, incluyendo la barra de búsqueda */
+}
+
+/* Estilos para cada link */
+.nav-links li {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 10px; /* Espaciado interno para simular botones */
+  transition: background-color 0.3s ease;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+}
+
+
+.nav-links li:hover {
+  color: #007bff; /* Cambiar color al pasar el cursor */
+}
+
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.searchInput {
+  padding: 10px 15px;  /* Ajusta el padding para que se vea mejor */
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchButton {
+  margin-left: -40px;  /* Ajustar para que el botón de búsqueda esté correctamente alineado */
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.searchButton svg {
+  fill: #666;  /* Color del ícono de la lupa */
+  width: 20px;  /* Ajusta el tamaño del ícono */
+  height: 20px;
+  transition: fill 0.3s ease;
+}
+
+.hamburgerButton {
+  display: none; /* Ocultar el botón de hamburguesa en pantallas grandes */
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+/*Inicio para los medias*/
+
+/* Mostrar el ícono del menú hamburguesa solo en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none; /* Ocultar el menú completo en pantallas pequeñas */
+  }
+
+  .hamburgerButton {
+    display: block; /* Mostrar el botón de menú hamburguesa */
+  }
+
+  .nav-links.showMenu {
+    display: flex; /* Mostrar el menú desplegable al hacer clic en el botón */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Ajustar la posición desde la parte superior (justo debajo del header/nav) */
+    left: 0; /* Extender desde el borde izquierdo */
+    right: 0; /* Extender hasta el borde derecho */
+    margin: 0 auto; /* Centrar horizontalmente el menú */
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle efecto de profundidad */
+    z-index: 1000;
+  }
+
+  .nav-links.showMenu li {
+    margin: 4px 0;
+    color: #333; /* Color del texto de los enlaces */
+    text-align: center; /* Centrar los enlaces */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Resaltar el texto para que se vea mejor */
+  }
+
+  .nav-links.showMenu li:hover {
+    background-color: #f0f0f0; /* Fondo gris claro al pasar el cursor */
+  }
+
+  .searchContainer {
+    margin-left: 16rem; /* Espacio entre los enlaces y la barra de búsqueda para pantallas pequeñas */
+  }
+}
+
+/* Ajustes para celulares pequeños (max-width de 480px) */
+@media screen and (max-width: 480px) {
+  .nav-links.showMenu {
+    top: 50px; /* Ajustar la posición del menú para pantallas más pequeñas */
+    padding: 15px;
+  }
+
+  .nav-links.showMenu li {
+    margin: 6px 0;
+  }
+
+  .hamburgerButton {
+    font-size: 1.2rem; /* Aumentar el tamaño del botón para facilidad de uso */
+  }
+
+  .searchContainer {
+    margin-left: 0; /* Eliminar el margen en pantallas muy pequeñas */
+    width: 100%; /* Asegurar que la barra de búsqueda ocupe todo el ancho disponible */
+  }
+}
+
+/* Ajustes para tabletas (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .nav-links.showMenu {
+    padding: 20px;
+  }
+
+  .nav-links.showMenu li {
+    margin: 8px 0;
+  }
+
+  .searchContainer {
+    margin-left: 8rem; /* Ajustar el margen para tabletas */
+  }
+}
+
+/* Ajustes para computadoras portátiles (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .hamburgerButton {
+    display: none; /* Ocultar el botón de menú hamburguesa en pantallas más grandes */
+  }
+
+  .searchContainer {
+    margin-left: 10rem; /* Ajustar el margen para computadoras portátiles */
+  }
+}
+
+/* Ajustes para monitores grandes (más de 1024px) */
+@media screen and (min-width: 1025px) {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .searchContainer {
+    margin-left: 20rem; /* Espacio adicional para pantallas grandes */
+  }
+}
+
+/*Fin para de los @medias*/
+
+.loginBox {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px; /* Ajustar ancho máximo del cuadro */
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #0077c8;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column; /* Mantén la columna para el input y el mensaje de error */
+  align-items: stretch; /* Alinea los elementos para ocupar todo el ancho */
+  margin-bottom: 1.5rem; /* Espacio para el mensaje de error */
+}
+
+.inputWrapper {
+  display: flex; /* Flexbox para alinear ícono e input */
+  align-items: center;
+  position: relative; /* Necesario para manejar el ícono de forma correcta */
+}
+
+
+.input {
+  flex: 1; /* El input ocupará el espacio restante */
+  padding: 0.75rem 1.5rem;
+  padding-left: 3rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 30px;
+  outline: none;
+  width: 80%; /* Asegura que el input ocupe todo el ancho disponible */
+}
+
+
+.icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #0077c8;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.link {
+  margin-left: 6.7rem; /* Reducir espacio para que esté más cerca del "Remember me" */
+  font-size: 0.9rem;
+  color: #0077c8;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button {
+  width: 98%;
+  padding: 0.75rem;
+  background-color: #0077c8;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #005fa3;
+}
+
+.footerLink {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #0077c8;
+  cursor: pointer;
+}
+
+/* Ajustar el estilo del campo con error */
+.inputError {
+  border: 1px solid red;
+}
+
+/* Mejorar el estilo del mensaje de error */
+.errorMessage {
+  color: #ff0000; /* Color del mensaje de error */
+  font-size: 0.85rem;
+  margin-top: 0.25rem; /* Espacio entre el input y el mensaje de error */
+  padding-left: 2.5rem; /* Para alinear el mensaje con el input */
+}
+
+
