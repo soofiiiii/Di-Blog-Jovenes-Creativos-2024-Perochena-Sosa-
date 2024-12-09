@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from 'react-modal';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 import styles from './LandingPage.module.css';
-import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 
 // Importaciones de imágenes
@@ -29,11 +32,34 @@ import galleryImage12 from '../../assets/gallery12.jpg';
 
 const LandingPage = () => {
 
+  const { isAuth, user, logout } = useContext(AuthContext); // Accede al contexto
+  const navigate = useNavigate();
+
+  // Sección de Estados
+
    // Estado para abrir la galería
    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
    const [currentImage, setCurrentImage] = useState(null);
    const [currentGallery, setCurrentGallery] = useState([]);
 
+  // Estado para la búsqueda
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Sección de Métodos
+
+  // Avanzar a la siguiente imagen
+  const goToNextImage = () => {
+    const currentIndex = currentGallery.indexOf(currentImage);
+    const nextIndex = (currentIndex + 1) % currentGallery.length;
+    setCurrentImage(currentGallery[nextIndex]);
+  };
+
+  // Retroceder a la imagen anterior
+  const goToPreviousImage = () => {
+    const currentIndex = currentGallery.indexOf(currentImage);
+    const previousIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    setCurrentImage(currentGallery[previousIndex]);
+  };
 
   // Galerías de imágenes para cada destino
   const images = {
@@ -55,60 +81,25 @@ const LandingPage = () => {
     setCurrentImage(null);
   };
 
-  // Avanzar a la siguiente imagen
-  const goToNextImage = () => {
-    const currentIndex = currentGallery.indexOf(currentImage);
-    const nextIndex = (currentIndex + 1) % currentGallery.length;
-    setCurrentImage(currentGallery[nextIndex]);
-  };
-
-  // Retroceder a la imagen anterior
-  const goToPreviousImage = () => {
-    const currentIndex = currentGallery.indexOf(currentImage);
-    const previousIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-    setCurrentImage(currentGallery[previousIndex]);
-  };
-
-   // Estado para la búsqueda
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Definir el estado del menú
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-      <h1 className={styles.navTitle}>Di-Blog</h1>
-      <nav className={styles.nav}>
-        <button className={styles.hamburgerButton} onClick={toggleMenu}>
-          ☰
-        </button>
-        <ul className={`${styles['nav-links']} ${isMenuOpen ? styles.showMenu : ''}`}>
-          {['HOLA', 'BLOG DE VIAJE', 'DESTINOS', 'GUÍAS', 'SOBRE NOSOTROS'].map((link) => (
-            <li key={link} onClick={() => setIsMenuOpen(false)}>
-              {link}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+     {/* Header Importado */}
+     <Header />
     
 
+      {/* Hero Section */}
       <section className={styles.heroSection} style={{ backgroundImage: `url(${image6})` }}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>Di-Blog</h1>
           <p className={styles.subTitle}>Learn More</p>
           <div className={styles.searchContainer}>
-            <input type="text"
+            <input   type="searchInput"
               className={styles.searchInput}
               placeholder="Buscar destinos, aventuras..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Permite escribir en el campo
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
+
             <button className={styles.searchButton}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -118,6 +109,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+
+      {/* Features Section */}
       <section className={styles.features}>
         {Object.entries(images).map(([galleryKey, galleryImages]) => (
           <div key={galleryKey} className={styles.featureCard}>
@@ -131,10 +124,13 @@ const LandingPage = () => {
               }
               alt={`Foto de destino ${galleryKey}`}
               onClick={() =>
-                openModal(galleryImages, 
-                  galleryKey === 'torrePisa' ? image1 : 
-                  galleryKey === 'tajMahal' ? image2 : 
-                  image3
+                openModal(
+                  galleryImages,
+                  galleryKey === 'torrePisa'
+                    ? image1
+                    : galleryKey === 'tajMahal'
+                    ? image2
+                    : image3
                 )
               }
             />
@@ -152,7 +148,17 @@ const LandingPage = () => {
                 ? 'Adéntrate en el monumento más romántico del mundo y déjate sorprender por su belleza eterna.'
                 : 'Explora la majestuosidad de las Cataratas Victoria, donde la naturaleza muestra todo su poder.'}
             </p>
-            <button className={styles.learnButton}>Learn More</button>
+            <Link
+              to={
+                galleryKey === 'torrePisa'
+                  ? '/torre-de-pisa'
+                  : galleryKey === 'tajMahal'
+                  ? '/taj-mahal'
+                  : '/cataratas-victoria'
+              }
+            >
+              <button className={styles.learnButton}>Learn More</button>
+            </Link>
             <div className={styles.featureGallery}>
               {galleryImages.map((img, index) => (
                 <img
@@ -167,6 +173,7 @@ const LandingPage = () => {
           </div>
         ))}
       </section>
+
 
       {/* Modal para la galería */}
       <Modal
@@ -208,6 +215,8 @@ const LandingPage = () => {
         )}
       </Modal>
 
+        {/* Footer Importado */}
+    <Footer />
     </div>
   );
 };

@@ -1,0 +1,218 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* La altura mínima será igual a la ventana */
+}
+
+.content {
+  flex: 1; /* Esto hace que el contenido principal ocupe todo el espacio disponible */
+  padding: 20px; /* Espaciado interno para el contenido */
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.destinationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.destinationCard {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.destinationImage {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.editButton, .deleteButton, .publishButton {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.editButton {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.publishButton {
+  background-color: #2196F3;
+  color: white;
+}
+
+.privatizeButton {
+  background-color: #f39c12; /* Color diferente para distinguir de Publicar */
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.privatizeButton:hover {
+  background-color: #e67e22;
+}
+
+/* src/pages/MyDestinations.module.css */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 80%;
+  text-align: center;
+}
+
+.descriptionInput {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.submitButton, .cancelButton {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.cancelButton {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+/*Inicio de los @media*/
+
+@media screen and (max-width: 768px) {
+  .mydestinations-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .destination-card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .filter-container {
+    display: none; /* Ocultar los filtros en pantallas pequeñas */
+  }
+
+  .add-button {
+    width: 80%;
+    margin-top: 15px;
+  }
+}
+
+/* Ajustes para celulares pequeños (max-width de 480px) */
+@media screen and (max-width: 480px) {
+  .mydestinations-container {
+    padding: 10px;
+  }
+
+  .destination-card {
+    margin-bottom: 15px;
+  }
+
+  .add-button {
+    font-size: 1.2rem; /* Aumentar el tamaño del botón para facilidad de uso */
+  }
+}
+
+/* Ajustes para tabletas (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .filter-container {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .destination-card {
+    width: 80%;
+  }
+}
+
+/* Ajustes para computadoras portátiles (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .mydestinations-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .destination-card {
+    width: 45%;
+    margin-bottom: 25px;
+  }
+
+  .filter-container {
+    display: block;
+  }
+}
+
+/* Ajustes para monitores grandes (más de 1024px) */
+@media screen and (min-width: 1025px) {
+  .mydestinations-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+
+  .destination-card {
+    width: 30%;
+    margin-bottom: 30px;
+  }
+
+  .filter-container {
+    display: block;
+    width: 25%;
+  }
+}
+/*Fin para los @medias*/
